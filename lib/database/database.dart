@@ -24,6 +24,14 @@ class AppDb extends _$AppDb {
     ));
   }
 
+  Future<void> deleteAllUsersAndPreferences() async {
+    // Биринчи кезекте UserPreferencesTable таблицасындагы бардык маалыматтарды өчүрүү
+    await (delete(userPreferencesTable)).go();
+
+    // Эми userTable таблицасындагы бардык маалыматтарды өчүрүү
+    await (delete(userTable)).go();
+  }
+
   Future<int> addUserPreference(
       int userId, String city, bool notificationsEnabled) {
     return into(userPreferencesTable).insert(UserPreferencesTableCompanion(
